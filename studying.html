@@ -322,7 +322,6 @@
     border-color: rgba(245, 197, 24, 0.4);
   }
 
-  /* ─── NAV ICON BUTTONS ─── */
   .nav-icon-btn {
     box-sizing: border-box;
     display: inline-flex;
@@ -354,7 +353,6 @@
     object-fit: contain;
   }
 
-  /* ─── SETTINGS PANEL ─── */
   #settings-panel {
     position: fixed;
     inset: 0;
@@ -445,7 +443,6 @@
   #open-about-blank-btn:hover { border-color: var(--border-hover); }
   #open-about-blank-btn:focus, #open-about-blank-btn:active, #open-about-blank-btn:focus-visible { outline: none; box-shadow: none; }
 
-  /* Hue Slider */
   #theme-hue-slider {
     -webkit-appearance: none;
     appearance: none;
@@ -499,7 +496,6 @@
     font-family: monospace;
   }
 
-  /* Panic Key */
   #panic-key-display {
     display: inline-flex;
     align-items: center;
@@ -551,7 +547,6 @@
   }
   #panic-key-clear:hover { border-color: rgba(255,80,80,0.7); }
 
-  /* Page Title */
   #page-title-input {
     width: 100%;
     box-sizing: border-box;
@@ -565,12 +560,8 @@
     outline: none;
     transition: border-color 0.2s;
   }
-  #page-title-input:focus {
-    border-color: var(--border-hover);
-  }
-  #page-title-input::placeholder {
-    color: var(--text-dim);
-  }
+  #page-title-input:focus { border-color: var(--border-hover); }
+  #page-title-input::placeholder { color: var(--text-dim); }
   #page-title-save {
     align-self: flex-start;
     padding: 8px 20px;
@@ -591,7 +582,6 @@
     transition: opacity 0.3s;
   }
 
-  /* ─── VANTA TOGGLE ─── */
   .vanta-toggle-row {
     display: flex;
     align-items: center;
@@ -642,7 +632,6 @@
     box-shadow: 0 0 8px hsl(var(--theme-hue), 90%, 70%, 0.7),
                 0 1px 4px rgba(0,0,0,0.3);
   }
-  /* little ripple ping on toggle-on */
   #vanta-toggle::after, #logo-toggle::after {
     content: '';
     position: absolute;
@@ -670,7 +659,6 @@
     color: hsl(var(--theme-hue), 70%, 65%);
   }
 
-  /* Vanta fog slider controls */
   .vanta-sliders {
     display: flex;
     flex-direction: column;
@@ -723,8 +711,7 @@
     width: 32px;
     text-align: right;
   }
-  /* ─── LIQUID GLASS ─── */
-  /* Cards get a tinted background only — no per-card backdrop-filter (too expensive at 276 elements) */
+
   body.liquid-glass .card {
     background: rgba(255, 255, 255, 0.07) !important;
     border-color: rgba(255, 255, 255, 0.13) !important;
@@ -739,7 +726,6 @@
     box-shadow: 0 4px 18px rgba(0,0,0,0.3),
                 inset 0 1px 0 rgba(255,255,255,0.16) !important;
   }
-  /* Small buttons are few — backdrop-filter is fine here */
   body.liquid-glass .fg-btn,
   body.liquid-glass .nav-icon-btn,
   body.liquid-glass #open-about-blank-btn,
@@ -784,305 +770,28 @@
 
 <script>
   window.addEventListener('DOMContentLoaded', function () {
-    confirm("4Math Tutoring Center — discord.4games.net");
+    confirm("4mathtutoring join NOW discord.4games.net");
   });
 </script>
 <script>
   window.addEventListener('DOMContentLoaded', function () {
-    confirm("4Math — discord.4games.net");
+    confirm("Unblockable edition for real this time. Lightspeed AI too slow lolololezezezez subto 4games on YOUTUBE AND TIKTOK");
   });
 </script>
 </head>
 <body>
-
 
 <div id="site-preloader" style="position:fixed;inset:0;z-index:99999;background:#000;">
   <div id="preload-status" style="color:#fff;padding:10px;font-family:monospace;font-size:13px;"></div>
 </div>
 
 <script>
-  window.CONTENT_API = 'https://masculine-avatar-factual.ngrok-free.dev';
+  /* ── PATCH: CDN is now the single source of truth for game assets ── */
+  window.CONTENT_API = 'https://cdn.jsdelivr.net/gh/4gamescontacting-alt/4mathtutoring-cards@master';
 </script>
 
 <script>
-window.__cachedItems = [
-  {"title":"1.5","url":"1.5.html"},
-  {"title":"1.8","url":"1.8.html"},
-  {"title":"10 Minutes Till Dawn","url":"10 Minutes Till Dawn.html"},
-  {"title":"12 Mini Battles","url":"12 Mini Battles.html"},
-  {"title":"1on1soccer","url":"https://res.cloudinary.com/wqoc1lct/raw/upload/v1792202063/1on1soccer.html"},
-  {"title":"1on1tennis","url":"https://res.cloudinary.com/wqoc1lct/raw/upload/v1792202065/1on1tennis.html"},
-  {"title":"1v1.lol","url":"1v1.lol.html"},
-  {"title":"2048","url":"2048.html"},
-  {"title":"2048cupcakes","url":"https://res.cloudinary.com/wqoc1lct/raw/upload/v1792202064/2048cupcakes.html"},
-  {"title":"3D Flight Simulator","url":"3D Flight Simulator.html"},
-  {"title":"8 Ball Classic","url":"https://res.cloudinary.com/wqoc1lct/raw/upload/v1792202067/8_Ball_Classic.html"},
-  {"title":"agariolite","url":"agariolite.html"},
-  {"title":"Age of War 2","url":"Age of War 2.html"},
-  {"title":"ageofwar","url":"ageofwar.html"},
-  {"title":"agesofconflict","url":"agesofconflict.html"},
-  {"title":"Alpha_1.2.6","url":"https://res.cloudinary.com/wqoc1lct/raw/upload/v1792202067/Alpha_1.2.6.html"},
-  {"title":"amongus","url":"https://res.cloudinary.com/wqoc1lct/raw/upload/v1792202067/amongus.html"},
-  {"title":"angrybirds","url":"angrybirds.html"},
-  {"title":"angrybirdsshowdown","url":"angrybirdsshowdown.html"},
-  {"title":"angrybirdsspace","url":"angrybirdsspace.html"},
-  {"title":"awesometanks","url":"https://res.cloudinary.com/wqoc1lct/raw/upload/v1792202061/awesometanks.html"},
-  {"title":"awesometanks2","url":"awesometanks2.html"},
-  {"title":"Backrooms","url":"Backrooms.html"},
-  {"title":"Bacon May Die","url":"https://res.cloudinary.com/wqoc1lct/raw/upload/v1792202059/Bacon_May_Die.html"},
-  {"title":"Bad Ice Cream 2","url":"https://res.cloudinary.com/wqoc1lct/raw/upload/v1792202059/Bad_Ice_Cream_2.html"},
-  {"title":"Bad Parenting","url":"Bad Parenting.html"},
-  {"title":"Bad Piggies","url":"https://res.cloudinary.com/wqoc1lct/raw/upload/v1792202062/Bad_Piggies.html"},
-  {"title":"badicecream","url":"https://res.cloudinary.com/wqoc1lct/raw/upload/v1792202062/badicecream.html"},
-  {"title":"badicecream3","url":"https://res.cloudinary.com/wqoc1lct/raw/upload/v1792202059/badicecream3.html"},
-  {"title":"Baldi's Basics","url":"Baldi's Basics.html"},
-  {"title":"Baseball Bros","url":"Baseball Bros.html"},
-  {"title":"Basketball Bros","url":"Basketball Bros.html"},
-  {"title":"Basketball Stars","url":"Basketball Stars.html"},
-  {"title":"basketballlegends","url":"https://res.cloudinary.com/wqoc1lct/raw/upload/v1792202063/basketballlegends.html"},
-  {"title":"basketrandom","url":"https://res.cloudinary.com/wqoc1lct/raw/upload/v1792202062/basketrandom.html"},
-  {"title":"Beta_1.3","url":"https://res.cloudinary.com/wqoc1lct/raw/upload/v1792259361/Beta_1.3.html"},
-  {"title":"Bitlife","url":"Bitlife.html"},
-  {"title":"Blocky Snakes","url":"Blocky Snakes.html"},
-  {"title":"Bloons TD 2","url":"https://res.cloudinary.com/wqoc1lct/raw/upload/v1792259361/Bloons_TD_2.html"},
-  {"title":"Bloons TD 5","url":"Bloons TD 5.html"},
-  {"title":"bloonsTD","url":"https://res.cloudinary.com/wqoc1lct/raw/upload/v1792259362/bloonsTD.html"},
-  {"title":"bloonsTD3","url":"https://res.cloudinary.com/wqoc1lct/raw/upload/v1792259362/bloonsTD3.html"},
-  {"title":"bloonsTD4","url":"bloonsTD4.html"},
-  {"title":"bloxorz","url":"https://res.cloudinary.com/wqoc1lct/raw/upload/v1792259367/bloxorz.html"},
-  {"title":"Blumgi Rocket","url":"https://res.cloudinary.com/wqoc1lct/raw/upload/v1792259362/blumgiracers.html"},
-  {"title":"blumgiracers","url":"blumgiracers.html"},
-  {"title":"Bob the Robber 5","url":"Bob the Robber 5.html"},
-  {"title":"bobtherobber","url":"bobtherobber.html"},
-  {"title":"bobtherobber2","url":"bobtherobber2.html"},
-  {"title":"Bouncy Motors","url":"Bouncy Motors.html"},
-  {"title":"bowmasters","url":"bowmasters.html"},
-  {"title":"Breaking the Bank","url":"Breaking the Bank.html"},
-  {"title":"bubbleshooter","url":"https://res.cloudinary.com/wqoc1lct/raw/upload/v1792259362/bubbleshooter.html"},
-  {"title":"Candy Crush","url":"Candy Crush.html"},
-  {"title":"Capybara Clicker","url":"Capybara Clicker.html"},
-  {"title":"cardrawing","url":"cardrawing.html"},
-  {"title":"Chess","url":"Chess.html"},
-  {"title":"Choppy Orc","url":"https://res.cloudinary.com/wqoc1lct/raw/upload/v1792259363/Choppy_Orc.html"},
-  {"title":"Circle O","url":"https://res.cloudinary.com/wqoc1lct/raw/upload/v1792259363/Circle_O.html"},
-  {"title":"circloO2","url":"https://res.cloudinary.com/wqoc1lct/raw/upload/v1792259363/circloO2.html"},
-  {"title":"Clash of Vikings","url":"https://res.cloudinary.com/wqoc1lct/raw/upload/v1792259363/Clash_of_Vikings.html"},
-  {"title":"cleanupio","url":"cleanupio.html"},
-  {"title":"clusterrush","url":"clusterrush.html"},
-  {"title":"Crazy Cars","url":"Crazy Cars.html"},
-  {"title":"Crazy Cattle 3D","url":"Crazy Cattle 3D.html"},
-  {"title":"crazycrashlanding","url":"crazycrashlanding.html"},
-  {"title":"crazymotorcycle","url":"crazymotorcycle.html"},
-  {"title":"Cut the Rope","url":"Cut the Rope.html"},
-  {"title":"dadish","url":"https://res.cloudinary.com/wqoc1lct/raw/upload/v1792259364/dadish.html"},
-  {"title":"Dadish 2","url":"https://res.cloudinary.com/wqoc1lct/raw/upload/v1792259364/Dadish_2.html"},
-  {"title":"Dadish 3","url":"https://res.cloudinary.com/wqoc1lct/raw/upload/v1792259364/Dadish_3.html"},
-  {"title":"Death Chase","url":"Death Chase.html"},
-  {"title":"deathrun3D","url":"https://res.cloudinary.com/wqoc1lct/raw/upload/v1792259364/deathrun3D.html"},
-  {"title":"demolitionderbycrashracing","url":"demolitionderbycrashracing.html"},
-  {"title":"doodlejump","url":"https://res.cloudinary.com/wqoc1lct/raw/upload/v1792259364/doodlejump.html"},
-  {"title":"drawclimber","url":"https://res.cloudinary.com/wqoc1lct/raw/upload/v1792259364/drawclimber.html"},
-  {"title":"Duck Life","url":"https://res.cloudinary.com/wqoc1lct/raw/upload/v1792259365/Duck_Life.html"},
-  {"title":"Duck Life 4","url":"Duck Life 4.html"},
-  {"title":"ducklife2","url":"https://res.cloudinary.com/wqoc1lct/raw/upload/v1792259365/ducklife2.html"},
-  {"title":"ducklife3","url":"ducklife3.html"},
-  {"title":"ducklife5","url":"ducklife5.html"},
-  {"title":"Ducklings IO","url":"https://res.cloudinary.com/wqoc1lct/raw/upload/v1792259365/Ducklings_IO.html"},
-  {"title":"Eagle Ride","url":"Eagle Ride.html"},
-  {"title":"Eaglercraft 1.12.2","url":"Eaglercraft 1.12.2.html"},
-  {"title":"Earn to Die 2","url":"Earn to Die 2.html"},
-  {"title":"earntodie","url":"earntodie.html"},
-  {"title":"eggycar","url":"https://res.cloudinary.com/wqoc1lct/raw/upload/v1792259365/eggycar.html"},
-  {"title":"Escape Road","url":"Escape Road.html"},
-  {"title":"escaperoad2","url":"escaperoad2.html"},
-  {"title":"escapingtheprison","url":"escapingtheprison.html"},
-  {"title":"evilglitch","url":"https://res.cloudinary.com/wqoc1lct/raw/upload/v1792259365/evilglitch.html"},
-  {"title":"Fancy Pants Adventure","url":"https://res.cloudinary.com/wqoc1lct/raw/upload/v1792259366/Fancy_Pants_Adventure.html"},
-  {"title":"Fancy Pants Adventure 2","url":"Fancy Pants Adventure 2.html"},
-  {"title":"Fireboy and Watergirl 2","url":"https://res.cloudinary.com/wqoc1lct/raw/upload/v1792259366/Fireboy_and_Watergirl_2.html"},
-  {"title":"Fireboy and Watergirl 4","url":"https://res.cloudinary.com/wqoc1lct/raw/upload/v1792259366/Fireboy_and_Watergirl_4.html"},
-  {"title":"fireboyandwatergirl","url":"https://res.cloudinary.com/wqoc1lct/raw/upload/v1792259366/fireboyandwatergirl.html"},
-  {"title":"fireboyandwatergirl3","url":"https://res.cloudinary.com/wqoc1lct/raw/upload/v1792259366/fireboyandwatergirl3.html"},
-  {"title":"flappybird","url":"https://res.cloudinary.com/wqoc1lct/raw/upload/v1792259366/flappybird.html"},
-  {"title":"Flood Runner 4","url":"Flood Runner 4.html"},
-  {"title":"floodrunner2","url":"https://res.cloudinary.com/wqoc1lct/raw/upload/v1792259367/floodrunner2.html"},
-  {"title":"floodrunner3","url":"floodrunner3.html"},
-  {"title":"FNAF","url":"FNAF.html"},
-  {"title":"FNAF 2","url":"FNAF 2.html"},
-  {"title":"FNAF 3","url":"FNAF 3.html"},
-  {"title":"fnaf4","url":"fnaf4.html"},
-  {"title":"Football Legends","url":"https://res.cloudinary.com/wqoc1lct/raw/upload/v1792259367/Football_Legends.html"},
-  {"title":"footballbros","url":"footballbros.html"},
-  {"title":"Free Rider 3","url":"https://res.cloudinary.com/wqoc1lct/raw/upload/v1792259367/Free_Rider_3.html"},
-  {"title":"Fruit Ninja","url":"https://res.cloudinary.com/wqoc1lct/raw/upload/v1792259367/Fruit_Ninja.html"},
-  {"title":"Funny Mad Racing","url":"Funny Mad Racing.html"},
-  {"title":"funnybattle","url":"funnybattle.html"},
-  {"title":"funnybattle2","url":"funnybattle2.html"},
-  {"title":"funnyshooter2","url":"funnyshooter2.html"},
-  {"title":"Geometry Dash","url":"Geometry Dash.html"},
-  {"title":"Geometry Dash Lite","url":"Geometry Dash Lite.html"},
-  {"title":"geometryvibes","url":"geometryvibes.html"},
-  {"title":"getontop","url":"https://res.cloudinary.com/wqoc1lct/raw/upload/v1792259367/getontop.html"},
-  {"title":"Gladihoppers","url":"Gladihoppers.html"},
-  {"title":"googlebaseball","url":"https://res.cloudinary.com/wqoc1lct/raw/upload/v1792259368/googlebaseball.html"},
-  {"title":"googledino","url":"https://res.cloudinary.com/wqoc1lct/raw/upload/v1792259367/googledino.html"},
-  {"title":"granny","url":"granny.html"},
-  {"title":"granny2","url":"granny2.html"},
-  {"title":"Guess Their Answer","url":"Guess Their Answer.html"},
-  {"title":"Hanger 2","url":"https://res.cloudinary.com/wqoc1lct/raw/upload/v1792259368/Hanger_2.html"},
-  {"title":"Happy Wheels","url":"Happy Wheels.html"},
-  {"title":"helixjump","url":"helixjump.html"},
-  {"title":"highwaytraffic","url":"highwaytraffic.html"},
-  {"title":"Hill Climb Racing Lite","url":"https://res.cloudinary.com/wqoc1lct/raw/upload/v1792259368/Hill_Climb_Racing_Lite.html"},
-  {"title":"holeio","url":"holeio.html"},
-  {"title":"House of Hazards","url":"House of Hazards.html"},
-  {"title":"Hover Racer Drive","url":"Hover Racer Drive.html"},
-  {"title":"idlebreakout","url":"https://res.cloudinary.com/wqoc1lct/raw/upload/v1792259368/idlebreakout.html"},
-  {"title":"Minecraft Indev","url":"https://res.cloudinary.com/wqoc1lct/raw/upload/v1792259368/Indev.html"},
-  {"title":"ironsnout","url":"https://res.cloudinary.com/wqoc1lct/raw/upload/v1792259368/ironsnout.html"},
-  {"title":"Jetpack Joyride","url":"Jetpack Joyride.html"},
-  {"title":"Johnny Trigger","url":"https://res.cloudinary.com/wqoc1lct/raw/upload/v1792259368/Johnny_Trigger.html"},
-  {"title":"Jumping Shell","url":"https://res.cloudinary.com/wqoc1lct/raw/upload/v1792259368/Jumping_Shell.html"},
-  {"title":"Karate Bros","url":"Karate Bros.html"},
-  {"title":"kartbros","url":"kartbros.html"},
-  {"title":"Learn to Fly","url":"https://res.cloudinary.com/wqoc1lct/raw/upload/v1792259368/Learn_to_Fly.html"},
-  {"title":"Learn to Fly 2","url":"Learn to Fly 2.html"},
-  {"title":"Learn to Fly 3","url":"Learn to Fly 3.html"},
-  {"title":"learntoflyidle","url":"learntoflyidle.html"},
-  {"title":"leveldevil","url":"https://res.cloudinary.com/wqoc1lct/raw/upload/v1792259368/leveldevil.html"},
-  {"title":"madalinstuntcars2","url":"madalinstuntcars2.html"},
-  {"title":"melonplayground","url":"melonplayground.html"},
-  {"title":"mergeroundracers","url":"https://res.cloudinary.com/wqoc1lct/raw/upload/v1792259369/mergeroundracers.html"},
-  {"title":"minesweeper","url":"https://res.cloudinary.com/wqoc1lct/raw/upload/v1792259368/minesweeper.html"},
-  {"title":"monstertracks","url":"https://res.cloudinary.com/wqoc1lct/raw/upload/v1792259369/monstertracks.html"},
-  {"title":"motox3m2","url":"https://res.cloudinary.com/wqoc1lct/raw/upload/v1792259369/motox3m2.html"},
-  {"title":"motox3m3","url":"motox3m3.html"},
-  {"title":"motox3mpoolparty","url":"https://res.cloudinary.com/wqoc1lct/raw/upload/v1792259369/motox3mpoolparty.html"},
-  {"title":"motox3mspookyland","url":"https://res.cloudinary.com/wqoc1lct/raw/upload/v1792259369/motox3mspookyland.html"},
-  {"title":"motox3mwinter","url":"https://res.cloudinary.com/wqoc1lct/raw/upload/v1792259369/motox3mwinter.html"},
-  {"title":"noobminer","url":"https://res.cloudinary.com/wqoc1lct/raw/upload/v1792259369/noobminer.html"},
-  {"title":"oppositeday","url":"oppositeday.html"},
-  {"title":"ovo","url":"https://res.cloudinary.com/wqoc1lct/raw/upload/v1792259370/ovo.html"},
-  {"title":"ovo2","url":"https://res.cloudinary.com/wqoc1lct/raw/upload/v1792259370/ovo2.html"},
-  {"title":"ovo3dimensions","url":"ovo3dimensions.html"},
-  {"title":"pacman","url":"https://res.cloudinary.com/wqoc1lct/raw/upload/v1792259370/pacman.html"},
-  {"title":"papasbakeria","url":"papasbakeria.html"},
-  {"title":"papasburgeria","url":"papasburgeria.html"},
-  {"title":"papascheeseria","url":"papascheeseria.html"},
-  {"title":"papascupcakeria","url":"papascupcakeria.html"},
-  {"title":"papasdonuteria","url":"papasdonuteria.html"},
-  {"title":"papasfreezeria","url":"papasfreezeria.html"},
-  {"title":"papashotdoggeria","url":"papashotdoggeria.html"},
-  {"title":"papaspancakeria","url":"papaspancakeria.html"},
-  {"title":"papaspastaria","url":"papaspastaria.html"},
-  {"title":"papaspizzeria","url":"papaspizzeria.html"},
-  {"title":"papasscooperia","url":"papasscooperia.html"},
-  {"title":"papassushiria","url":"papassushiria.html"},
-  {"title":"papastacomia","url":"papastacomia.html"},
-  {"title":"papaswingeria","url":"papaswingeria.html"},
-  {"title":"Parking Arena","url":"Parking Arena.html"},
-  {"title":"parkingfury","url":"https://res.cloudinary.com/wqoc1lct/raw/upload/v1792259370/parkingfury.html"},
-  {"title":"parkingfury2","url":"https://res.cloudinary.com/wqoc1lct/raw/upload/v1792259371/parkingfury2.html"},
-  {"title":"parkingfury3","url":"https://res.cloudinary.com/wqoc1lct/raw/upload/v1792259370/parkingfury3.html"},
-  {"title":"picosschool","url":"https://res.cloudinary.com/wqoc1lct/raw/upload/v1792259371/picosschool.html"},
-  {"title":"pingpongchaos","url":"pingpongchaos.html"},
-  {"title":"pixelspeedrun","url":"https://res.cloudinary.com/wqoc1lct/raw/upload/v1792259371/pixelspeedrun.html"},
-  {"title":"plantsvszombies","url":"plantsvszombies.html"},
-  {"title":"plonky","url":"https://res.cloudinary.com/wqoc1lct/raw/upload/v1792259370/plonky.html"},
-  {"title":"polytrack","url":"https://res.cloudinary.com/wqoc1lct/raw/upload/v1792259371/polytrack.html"},
-  {"title":"poorbunny","url":"https://res.cloudinary.com/wqoc1lct/raw/upload/v1792259371/poorbunny.html"},
-  {"title":"pou","url":"pou.html"},
-  {"title":"ragdollhit","url":"ragdollhit.html"},
-  {"title":"ragdollsoccer","url":"ragdollsoccer.html"},
-  {"title":"redball4vol1","url":"redball4vol1.html"},
-  {"title":"redball4vol2","url":"redball4vol2.html"},
-  {"title":"redball4vol3","url":"redball4vol3.html"},
-  {"title":"retrobowl","url":"https://res.cloudinary.com/wqoc1lct/raw/upload/v1792259372/retrobowl.html"},
-  {"title":"retrobowlcollege","url":"https://res.cloudinary.com/wqoc1lct/raw/upload/v1792259371/retrobowlcollege.html"},
-  {"title":"retrohighway","url":"https://res.cloudinary.com/wqoc1lct/raw/upload/v1792259372/retrohighway.html"},
-  {"title":"retropingpong","url":"https://res.cloudinary.com/wqoc1lct/raw/upload/v1792259372/retropingpong.html"},
-  {"title":"riddleschool","url":"https://res.cloudinary.com/wqoc1lct/raw/upload/v1792259372/riddleschool.html"},
-  {"title":"riddleschool2","url":"https://res.cloudinary.com/wqoc1lct/raw/upload/v1792259372/riddleschool2.html"},
-  {"title":"riddleschool3","url":"riddleschool3.html"},
-  {"title":"riddleschool4","url":"riddleschool4.html"},
-  {"title":"riddleschool5","url":"riddleschool5.html"},
-  {"title":"riddletransfer","url":"riddletransfer.html"},
-  {"title":"riddletransfer2","url":"riddletransfer2.html"},
-  {"title":"rocketsoccerderby","url":"rocketsoccerderby.html"},
-  {"title":"rooftopsnipers2","url":"rooftopsnipers2.html"},
-  {"title":"run","url":"https://res.cloudinary.com/wqoc1lct/raw/upload/v1792259372/run.html"},
-  {"title":"run2","url":"https://res.cloudinary.com/wqoc1lct/raw/upload/v1792259372/run2.html"},
-  {"title":"run3","url":"run3.html"},
-  {"title":"sandgame","url":"https://res.cloudinary.com/wqoc1lct/raw/upload/v1792259372/sandgame.html"},
-  {"title":"shortlife","url":"shortlife.html"},
-  {"title":"slope","url":"slope.html"},
-  {"title":"slope2player","url":"slope2player.html"},
-  {"title":"slope3","url":"slope3.html"},
-  {"title":"slowroads","url":"slowroads.html"},
-  {"title":"sm63","url":"sm63.html"},
-  {"title":"sm64","url":"https://res.cloudinary.com/wqoc1lct/raw/upload/v1792259373/sm64.html"},
-  {"title":"snowballio","url":"snowballio.html"},
-  {"title":"soccerbros","url":"soccerbros.html"},
-  {"title":"spacebarclicker","url":"https://res.cloudinary.com/wqoc1lct/raw/upload/v1792259373/spacebarclicker.html"},
-  {"title":"spaceiskey","url":"https://res.cloudinary.com/wqoc1lct/raw/upload/v1792259373/spaceiskey.html"},
-  {"title":"spaceiskey2","url":"https://res.cloudinary.com/wqoc1lct/raw/upload/v1792259373/spaceiskey2.html"},
-  {"title":"spacewaves","url":"spacewaves.html"},
-  {"title":"speedstars","url":"speedstars.html"},
-  {"title":"sprunki","url":"sprunki.html"},
-  {"title":"stack","url":"https://res.cloudinary.com/wqoc1lct/raw/upload/v1792259373/stack.html"},
-  {"title":"stacktris","url":"https://res.cloudinary.com/wqoc1lct/raw/upload/v1792259373/stacktris.html"},
-  {"title":"stateio","url":"https://res.cloudinary.com/wqoc1lct/raw/upload/v1792259373/stateio.html"},
-  {"title":"stickarchersbattle","url":"https://res.cloudinary.com/wqoc1lct/raw/upload/v1792259373/stickarchersbattle.html"},
-  {"title":"stickfighter","url":"https://res.cloudinary.com/wqoc1lct/raw/upload/v1792259375/stickfighter.html"},
-  {"title":"stickmanhook","url":"https://res.cloudinary.com/wqoc1lct/raw/upload/v1792259374/stickmanhook.html"},
-  {"title":"stickmerge","url":"https://res.cloudinary.com/wqoc1lct/raw/upload/v1792259374/stickmerge.html"},
-  {"title":"subwaysurfersbeijing","url":"subwaysurfersbeijing.html"},
-  {"title":"subwaysurferssanfrancisco","url":"subwaysurferssanfrancisco.html"},
-  {"title":"superbikethechampion","url":"superbikethechampion.html"},
-  {"title":"superhot","url":"superhot.html"},
-  {"title":"superliquidsoccer","url":"superliquidsoccer.html"},
-  {"title":"superstarcar","url":"superstarcar.html"},
-  {"title":"tabletennisworldtour","url":"https://res.cloudinary.com/wqoc1lct/raw/upload/v1792259374/tabletennisworldtour.html"},
-  {"title":"tag","url":"https://res.cloudinary.com/wqoc1lct/raw/upload/v1792259374/tag.html"},
-  {"title":"taproad","url":"taproad.html"},
-  {"title":"templeofboom","url":"https://res.cloudinary.com/wqoc1lct/raw/upload/v1792259374/templeofboom.html"},
-  {"title":"territorialio","url":"https://res.cloudinary.com/wqoc1lct/raw/upload/v1792259374/territorialio.html"},
-  {"title":"theimpossiblequiz","url":"theimpossiblequiz.html"},
-  {"title":"theimpossiblequiz2","url":"theimpossiblequiz2.html"},
-  {"title":"thereisnog","url":"https://res.cloudinary.com/wqoc1lct/raw/upload/v1792259375/thereisnog.html"},
-  {"title":"theyarecoming","url":"theyarecoming.html"},
-  {"title":"thisistheonlylevel","url":"https://res.cloudinary.com/wqoc1lct/raw/upload/v1792259375/thisistheonlylevel.html"},
-  {"title":"thisistheonlyleveltoo","url":"https://res.cloudinary.com/wqoc1lct/raw/upload/v1792259375/thisistheonlyleveltoo.html"},
-  {"title":"timeshooter2","url":"timeshooter2.html"},
-  {"title":"tinyfishing","url":"https://res.cloudinary.com/wqoc1lct/raw/upload/v1792259375/tinyfishing.html"},
-  {"title":"trapthecat","url":"https://res.cloudinary.com/wqoc1lct/raw/upload/v1792259375/trapthecat.html"},
-  {"title":"triviacrack","url":"https://res.cloudinary.com/wqoc1lct/raw/upload/v1792259375/triviacrack.html"},
-  {"title":"tubejumpers","url":"tubejumpers.html"},
-  {"title":"tunnelrush","url":"tunnelrush.html"},
-  {"title":"unicyclehero","url":"https://res.cloudinary.com/wqoc1lct/raw/upload/v1792259375/unicyclehero.html"},
-  {"title":"vex4","url":"vex4.html"},
-  {"title":"vex5","url":"vex5.html"},
-  {"title":"vexx3m","url":"vexx3m.html"},
-  {"title":"vexx3m2","url":"vexx3m2.html"},
-  {"title":"volleyrandom","url":"https://res.cloudinary.com/wqoc1lct/raw/upload/v1792259376/volleyrandom.html"},
-  {"title":"wartheknights","url":"wartheknights.html"},
-  {"title":"webecomewhatwebehold","url":"https://res.cloudinary.com/wqoc1lct/raw/upload/v1792259376/webecomewhatwebehold.html"},
-  {"title":"wheeliebike","url":"https://res.cloudinary.com/wqoc1lct/raw/upload/v1792259376/wheeliebike.html"},
-  {"title":"wheely","url":"wheely.html"},
-  {"title":"wheely2","url":"wheely2.html"},
-  {"title":"wheely3","url":"wheely3.html"},
-  {"title":"wheely4","url":"wheely4.html"},
-  {"title":"wheely5","url":"wheely5.html"},
-  {"title":"wheely6","url":"wheely6.html"},
-  {"title":"wheely7","url":"wheely7.html"},
-  {"title":"wheely8","url":"wheely8.html"},
-  {"title":"wordleunlimited","url":"https://res.cloudinary.com/wqoc1lct/raw/upload/v1792259376/wordleunlimited.html"},
-  {"title":"worldshardestgame","url":"https://res.cloudinary.com/wqoc1lct/raw/upload/v1792259376/worldshardestgame.html"},
-  {"title":"worldshardestgame2","url":"https://res.cloudinary.com/wqoc1lct/raw/upload/v1792259376/worldshardestgame2.html"},
-  {"title":"worldshardestgame3","url":"https://res.cloudinary.com/wqoc1lct/raw/upload/v1792259376/worldshardestgame3.html"},
-  {"title":"wrestlebros","url":"wrestlebros.html"},
-  {"title":"zombierush","url":"https://res.cloudinary.com/wqoc1lct/raw/upload/v1792259376/zombierush.html"}
-];
+window.__cachedItems = null; /* cleared — CDN is authoritative; built-in fallback removed */
 </script>
 
 <script>
@@ -1099,26 +808,24 @@ window.__cachedItems = [
     img.onload = img.onerror = function() { log('loading image ' + (++imgDone) + '/' + urls.length); tryDone(); };
     img.src = u;
   });
-  (window.__cachedItems
-    ? Promise.resolve(window.__cachedItems)
-    : fetchItems()
-  ).then(function(d){
-    window.__cachedItems = d;
-    var cards = Array.isArray(d) ? d.length : '?';
-    log('loading cards ' + cards + '/' + cards);
-    finished = true;
-    tryDone();
-  }).catch(function(){ log('loading cards failed'); finished = true; tryDone(); });
+  fetchItems()
+    .then(function(d){
+      window.__cachedItems = d;
+      var cards = Array.isArray(d) ? d.length : '?';
+      log('loading cards ' + cards + '/' + cards);
+      finished = true;
+      tryDone();
+    }).catch(function(){ log('loading cards failed'); finished = true; tryDone(); });
 })();
 
 function fetchItems() {
-  var primary  = (window.CONTENT_API || '') + '/games/list';
-  var fallback = '/games/list';
-  return fetch(primary)
-    .then(function(r) { if (!r.ok) throw new Error('games-server error'); return r.json(); })
-    .catch(function() {
-      document.getElementById('preload-status').innerHTML += 'server unavailable, using fallback<br>';
-      return fetch(fallback).then(function(r) { return r.json(); });
+  /* ── PATCH: load game list from jsDelivr CDN ── */
+  var cdn = 'https://cdn.jsdelivr.net/gh/4gamescontacting-alt/4mathtutoring-cards@master/games.json';
+  return fetch(cdn)
+    .then(function(r) { if (!r.ok) throw new Error('CDN error ' + r.status); return r.json(); })
+    .catch(function(err) {
+      document.getElementById('preload-status').innerHTML += 'CDN unavailable: ' + err.message + '<br>';
+      return Promise.reject(err);
     });
 }
 </script>
@@ -1148,7 +855,6 @@ function fetchItems() {
       <img src="https://ik.imagekit.io/rckdebdbt/chat.png" alt="Chat">
     </a>
 
-
     <input type="text" id="searchInput" placeholder="Search games..." style="padding:8px 14px;font-size:14px;border-radius:10px;border:none;background:#1a1a1a;color:white;outline:none;flex:1;max-width:260px;">
 
     <div id="gameCount" style="font-size:13px;color:#94a3b8;white-space:nowrap;">
@@ -1165,7 +871,6 @@ function fetchItems() {
 <footer>
   <p>4games | discord.4games.net | press alt f4 for free games</p>
 </footer>
-
 
 <div id="fg-viewer">
   <div id="fg-header">
@@ -1208,7 +913,6 @@ function fetchItems() {
   </div>
 </div>
 
-
 <div id="settings-panel" aria-hidden="true">
   <div id="settings-header">
     <span id="settings-header-title">Settings</span>
@@ -1221,8 +925,6 @@ function fetchItems() {
   </div>
 
   <div id="settings-body">
-
-    
     <div class="settings-section">
       <div class="settings-row">
         <div class="settings-row-title">accent color</div>
@@ -1234,7 +936,6 @@ function fetchItems() {
       </div>
     </div>
 
-    
     <div class="settings-section">
       <div class="settings-row">
         <div class="settings-row-title">vanta fog background</div>
@@ -1265,7 +966,6 @@ function fetchItems() {
       </div>
     </div>
 
-    
     <div class="settings-section">
       <div class="settings-row">
         <div class="settings-row-title">logo style</div>
@@ -1279,7 +979,6 @@ function fetchItems() {
       </div>
     </div>
 
-    
     <div class="settings-section">
       <div class="settings-row">
         <div class="settings-row-title">liquid glass</div>
@@ -1295,7 +994,6 @@ function fetchItems() {
       </div>
     </div>
 
-    
     <div class="settings-section">
       <div class="settings-row">
         <div class="settings-row-title">panic key</div>
@@ -1309,18 +1007,16 @@ function fetchItems() {
       </div>
     </div>
 
-    
     <div class="settings-section">
       <div class="settings-row">
         <div class="settings-row-title">change page title</div>
-        <div class="settings-row-desc">tab cloak essentially. change page title name </div>
+        <div class="settings-row-desc">tab cloak essentially. change page title name</div>
         <input type="text" id="page-title-input" placeholder="e.g. Google Classroom" maxlength="120">
         <button id="page-title-save" onclick="pageTitleSave()">Apply Title</button>
         <div id="page-title-feedback"></div>
       </div>
     </div>
 
-    
     <div class="settings-section">
       <div class="settings-row">
         <div class="settings-row-title">open in blank</div>
@@ -1328,10 +1024,8 @@ function fetchItems() {
         <button id="open-about-blank-btn" onclick="openCurrentPageInBlank()">Open Page</button>
       </div>
     </div>
-
   </div>
 </div>
-
 
 <script>
 (function () {
@@ -1400,7 +1094,9 @@ function fetchItems() {
   };
 
   function loadIntoIframe(url) {
-    if (/cloudinary\.com/i.test(url)) {
+    /* jsDelivr and Cloudinary both serve .html files as text/plain,
+       so we fetch → inject as a blob to force proper HTML rendering. */
+    if (/jsdelivr\.net|cloudinary\.com/i.test(url)) {
       fetch(url)
         .then(function(r) { return r.text(); })
         .then(function(html) {
@@ -1534,7 +1230,6 @@ function fetchItems() {
 })();
 </script>
 
-
 <script>
 (function () {
   var SETTINGS_KEY = '4g_settings';
@@ -1558,7 +1253,6 @@ function fetchItems() {
     var hue = parseInt(this.value, 10);
     applyHue(hue);
     var s = loadSettings(); s.themeHue = hue; saveSettings(s);
-    // Update vanta colors live when hue changes
     if (window.vantaUpdateColors) window.vantaUpdateColors();
   });
 
@@ -1702,8 +1396,6 @@ function fetchItems() {
 })();
 </script>
 
-
-
 <style>
 #css-fog {
   position: fixed;
@@ -1711,7 +1403,7 @@ function fetchItems() {
   pointer-events: none;
   z-index: 0;
   overflow: hidden;
-  display: none; /* hidden until enabled */
+  display: none;
   will-change: transform;
 }
 #css-fog.active { display: block; }
@@ -1762,10 +1454,8 @@ function fetchItems() {
   var storedSpeed = 12;
   var storedZoom  = 9;
 
-  /* ── DOM creation ── */
   var fogEl = null;
 
-  // Blob definitions: [left%, top%, width-vw, height-vh, animation-name, delay-s]
   var BLOBS = [
     ['-10%', '-15%', 90, 80,  'fog-drift-a', 0   ],
     [ '50%', '-10%', 80, 75,  'fog-drift-b', 1.7 ],
@@ -1802,13 +1492,12 @@ function fetchItems() {
   function applyColors() {
     if (!fogEl) return;
     var hue = getHue();
-    // Alternate blobs between highlight and midtone hues
     var cols = [
-      'hsl(' + hue       + ',60%,28%)',
-      'hsl(' + (hue + 20)% 360 + ',45%,18%)',
-      'hsl(' + hue       + ',55%,22%)',
+      'hsl(' + hue              + ',60%,28%)',
+      'hsl(' + (hue + 20) % 360 + ',45%,18%)',
+      'hsl(' + hue              + ',55%,22%)',
       'hsl(' + (hue - 15 + 360) % 360 + ',40%,15%)',
-      'hsl(' + (hue + 10)% 360 + ',50%,24%)',
+      'hsl(' + (hue + 10) % 360 + ',50%,24%)',
     ];
     fogEl.querySelectorAll('.fog-blob').forEach(function(b, i) {
       var c = cols[i % cols.length];
@@ -1818,14 +1507,12 @@ function fetchItems() {
 
   function applyBlur() {
     if (!fogEl) return;
-    // storedBlur 0-10 → CSS blur 20px-120px
     var px = 20 + storedBlur * 10;
     fogEl.style.filter = 'blur(' + px + 'px)';
   }
 
   function applySpeed() {
     if (!fogEl) return;
-    // storedSpeed 1-20 → duration 60s-4s (higher slider = faster)
     var dur = (64 - storedSpeed * 3).toFixed(1) + 's';
     fogEl.querySelectorAll('.fog-blob').forEach(function(b) {
       b.style.animationDuration = dur;
@@ -1834,7 +1521,6 @@ function fetchItems() {
 
   function applyZoom() {
     if (!fogEl) return;
-    // storedZoom 1-30 → scale 0.7-2.0
     var sc = (0.7 + storedZoom * 0.043).toFixed(3);
     fogEl.style.transform = 'scale(' + sc + ')';
     fogEl.style.transformOrigin = '50% 50%';
@@ -1927,8 +1613,10 @@ function fetchItems() {
       function(){ return storedSpeed; }, function(v){ storedSpeed = v; }, 10, applySpeed);
     wireSlider('vanta-zoom',  'vanta-zoom-val',
       function(){ return storedZoom; },  function(v){ storedZoom  = v; }, 10, applyZoom);
+
     setUI(fogEnabled);
   });
+
 })();
 </script>
 
@@ -1974,7 +1662,6 @@ function fetchItems() {
     applyLG(lgEnabled);
     setLGUI(lgEnabled);
     persist();
-    // ping ripple
     var t = document.getElementById('lg-toggle');
     if (t) {
       t.style.outline = '2px solid hsl(' + getHue() + ',70%,55%)';
@@ -1993,7 +1680,6 @@ function fetchItems() {
   } catch(e) {}
 })();
 </script>
-
 
 <script>
 (function() {
@@ -2030,16 +1716,17 @@ function fetchItems() {
 
   window.fgResortGrid = sortCards;
 
-  var BASE_URL = 'https://masculine-avatar-factual.ngrok-free.dev';
+  /* ── PATCH: BASE_URL now points to jsDelivr CDN ── */
+  var BASE_URL = 'https://cdn.jsdelivr.net/gh/4gamescontacting-alt/4mathtutoring-cards@master';
 
-  (window.__cachedItems
-    ? Promise.resolve(window.__cachedItems)
-    : fetchItems()
-  ).then(function(items) {
+  fetchItems()
+    .then(function(items) {
       var favs = window.fgFavUtils ? window.fgFavUtils.getFavs() : [];
 
       items.forEach(function(item) {
-        var url = /^https?:\/\//i.test(item.url) ? item.url : BASE_URL + '/games/' + item.url;
+        /* If the url in games.json is already absolute, use it as-is.
+           Otherwise prefix with the CDN base so relative paths resolve correctly. */
+        var url = /^https?:\/\//i.test(item.url) ? item.url : BASE_URL + '/' + item.url;
         var a = document.createElement('a');
         a.href = url;
         a.className = 'card';
@@ -2074,7 +1761,6 @@ function fetchItems() {
     });
 })();
 </script>
-
 
 <script>
 (function () {
