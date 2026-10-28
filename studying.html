@@ -1110,19 +1110,12 @@ function fetchItems() {
   </div>
 </div>
 
-<!-- ═══════════════════════════════════════════════════════════════
-     PLAY COUNTER — global click tracking via Firebase Firestore
-     Collection: "playCounts"  Document ID: sanitized game title
-     Each doc: { title: string, count: number }
-     ═══════════════════════════════════════════════════════════════ -->
-
-<!-- Firebase SDKs (compat build — works as plain <script> tags, no bundler needed) -->
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
 
 <script>
 (function () {
-  /* ── Firebase config ── */
+
   var firebaseConfig = {
     apiKey:            "AIzaSyCkTYpokbDM0K-7g1_XPAzw7QxLn1S5hs0",
     authDomain:        "math-stats-69472.firebaseapp.com",
