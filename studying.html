@@ -101,7 +101,7 @@
     min-width: 0;
     background: var(--card-bg);
     border-radius: 15px;
-    padding: 20px;
+    padding: 20px 20px 30px 20px;
     text-align: center;
     border: 2px solid var(--border-dim);
     transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
@@ -111,6 +111,8 @@
     color: inherit;
     will-change: transform;
     contain: layout style;
+    position: relative;
+    overflow: hidden;
   }
 
   .card:hover, .card:focus {
@@ -121,6 +123,39 @@
 
   .card h3 { margin-top: 0; font-weight: 600; }
   .card p { color: var(--text-dim); font-size: 0.9rem; }
+
+  /* ── Play count badge ── */
+  .play-count-badge {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 5px 8px;
+    background: transparent;
+    border-radius: 0 0 13px 13px;
+    font-size: 11px;
+    font-family: 'Fredoka', sans-serif;
+    color: #94a3b8;
+    opacity: 0;
+    transform: translateY(4px);
+    transition: opacity 0.18s ease, transform 0.18s ease;
+    pointer-events: none;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-align: center;
+    letter-spacing: 0.02em;
+  }
+  .card:hover .play-count-badge {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  .play-count-badge.has-count {
+    color: hsl(var(--theme-hue), 70%, 65%);
+  }
+  .play-count-badge.loading {
+    color: #4a5568;
+  }
 
   @media (max-width: 1024px) {
     .item-grid { grid-template-columns: repeat(3, minmax(0, 220px)); }
@@ -140,7 +175,6 @@
     color: white;
     margin-top: 10px;
   }
-
 
   #fg-viewer {
     position: fixed;
@@ -766,6 +800,18 @@
     background: rgba(255, 80, 80, 0.12) !important;
     border-color: rgba(255, 80, 80, 0.5) !important;
   }
+  body.liquid-glass .play-count-badge {
+    background: transparent !important;
+  }
+
+  /* ── Play counting disabled ── */
+  body.no-play-counts .play-count-badge { display: none !important; }
+  body.no-play-counts #sort-plays-toggle {
+    opacity: 0.35;
+    pointer-events: none;
+    cursor: not-allowed;
+  }
+  body.no-play-counts #sort-plays-label { opacity: 0.35; }
 </style>
 
 <script>
@@ -786,12 +832,15 @@
 </div>
 
 <script>
-  /* ── PATCH: CDN is now the single source of truth for game assets ── */
   window.CONTENT_API = 'https://cdn.jsdelivr.net/gh/4gamescontacting-alt/4mathtutoring-cards@master';
 </script>
 
 <script>
-window.__cachedItems = null; /* cleared — CDN is authoritative; built-in fallback removed */
+window.__cachedItems = null;
+/* FIX: flag set to true after a full collection fetch — avoids per-card Firestore reads */
+window.playCountsFullyLoaded = false;
+/* When false, trackPlay and loadPlayCount are both no-ops */
+window.playCountingEnabled = true;
 </script>
 
 <script>
@@ -819,7 +868,6 @@ window.__cachedItems = null; /* cleared — CDN is authoritative; built-in fallb
 })();
 
 function fetchItems() {
-  /* ── PATCH: load game list from jsDelivr CDN ── */
   var cdn = 'https://cdn.jsdelivr.net/gh/4gamescontacting-alt/4mathtutoring-cards@master/games.json';
   return fetch(cdn)
     .then(function(r) { if (!r.ok) throw new Error('CDN error ' + r.status); return r.json(); })
@@ -1024,8 +1072,162 @@ function fetchItems() {
         <button id="open-about-blank-btn" onclick="openCurrentPageInBlank()">Open Page</button>
       </div>
     </div>
+
+    <div class="settings-section">
+      <div class="settings-row">
+        <div class="settings-row-title">play counting</div>
+        <div class="settings-row-desc">track and display how many times each game has been played. turn off to hide all play counts and stop recording plays.</div>
+        <div class="vanta-toggle-row">
+          <div id="play-count-toggle" onclick="playCountingToggle()" role="switch" aria-checked="true" tabindex="0"
+            style="width:60px;height:32px;border-radius:99px;background:var(--card-bg);border:2px solid var(--border-dim);position:relative;cursor:pointer;flex-shrink:0;transition:background 0.35s cubic-bezier(0.4,0,0.2,1),border-color 0.35s cubic-bezier(0.4,0,0.2,1),box-shadow 0.35s cubic-bezier(0.4,0,0.2,1);outline:none;">
+            <div id="play-count-thumb"
+              style="position:absolute;top:50%;left:3px;width:22px;height:22px;border-radius:50%;background:#64748b;box-shadow:0 1px 4px rgba(0,0,0,0.5);transform:translateY(-50%);transition:transform 0.35s cubic-bezier(0.34,1.56,0.64,1),background 0.35s,box-shadow 0.35s;"></div>
+          </div>
+          <span id="play-count-label" style="font-size:14px;font-weight:600;color:var(--text-dim);transition:color 0.3s;min-width:24px;">on</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="settings-section">
+      <div class="settings-row">
+        <div class="settings-row-title">sort by most played</div>
+        <div class="settings-row-desc">rank cards by total play count instead of alphabetically. favorites still float to the top.</div>
+        <div class="vanta-toggle-row">
+          <div id="sort-plays-toggle" onclick="sortPlaysToggle()" role="switch" aria-checked="false" tabindex="0"
+            style="width:60px;height:32px;border-radius:99px;background:var(--card-bg);border:2px solid var(--border-dim);position:relative;cursor:pointer;flex-shrink:0;transition:background 0.35s cubic-bezier(0.4,0,0.2,1),border-color 0.35s cubic-bezier(0.4,0,0.2,1),box-shadow 0.35s cubic-bezier(0.4,0,0.2,1);outline:none;">
+            <div id="sort-plays-thumb"
+              style="position:absolute;top:50%;left:3px;width:22px;height:22px;border-radius:50%;background:#64748b;box-shadow:0 1px 4px rgba(0,0,0,0.5);transform:translateY(-50%);transition:transform 0.35s cubic-bezier(0.34,1.56,0.64,1),background 0.35s,box-shadow 0.35s;"></div>
+          </div>
+          <span id="sort-plays-label" style="font-size:14px;font-weight:600;color:var(--text-dim);transition:color 0.3s;min-width:24px;">off</span>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     PLAY COUNTER — global click tracking via Firebase Firestore
+     Collection: "playCounts"  Document ID: sanitized game title
+     Each doc: { title: string, count: number }
+     ═══════════════════════════════════════════════════════════════ -->
+
+<!-- Firebase SDKs (compat build — works as plain <script> tags, no bundler needed) -->
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+
+<script>
+(function () {
+  /* ── Firebase config ── */
+  var firebaseConfig = {
+    apiKey:            "AIzaSyCkTYpokbDM0K-7g1_XPAzw7QxLn1S5hs0",
+    authDomain:        "math-stats-69472.firebaseapp.com",
+    projectId:         "math-stats-69472",
+    storageBucket:     "math-stats-69472.firebasestorage.app",
+    messagingSenderId: "115172329578",
+    appId:             "1:115172329578:web:c69069011c5522f13a2213",
+    measurementId:     "G-EXN929T8D3"
+  };
+
+ 
+  var fbApp = firebase.apps.length
+    ? firebase.apps[0]
+    : firebase.initializeApp(firebaseConfig);
+  var db = firebase.firestore(fbApp);
+  var COLLECTION = 'playCounts';
+
+
+  function toDocId(title) {
+    return title.toLowerCase().replace(/[^a-z0-9]/g, '-').replace(/-+/g, '-').slice(0, 100);
+  }
+
+  /* Render a count into a badge element */
+  function setBadge(badge, count, title) {
+    if (!badge) return;
+    /* Update the cache so sort-by-plays stays accurate */
+    if (title && window.setPlayCountCache) window.setPlayCountCache(title, count);
+    if (count > 0) {
+      badge.textContent = count.toLocaleString() + (count === 1 ? ' play' : ' plays');
+      badge.classList.remove('has-count', 'loading');
+    } else {
+      badge.textContent = 'be the first to play';
+      badge.classList.remove('has-count', 'loading');
+    }
+  }
+
+
+  window.db_playCounts = db.collection(COLLECTION);
+
+
+  window.bulkFetchPlayCounts = function (callback) {
+    db.collection(COLLECTION).get()
+      .then(function (snap) {
+        snap.forEach(function (doc) {
+          var data = doc.data();
+          if (data.title && window.setPlayCountCache) {
+            window.setPlayCountCache(data.title, data.count || 0);
+          }
+        });
+        window.playCountsFullyLoaded = true;
+        if (callback) callback();
+      })
+      .catch(function () {
+        /* On failure, leave playCountsFullyLoaded false so hover reads still work */
+        if (callback) callback();
+      });
+  };
+
+ 
+  window.loadPlayCount = function (title, badge) {
+    if (!badge) return;
+    /* Counting disabled — leave badge empty, CSS hides it anyway */
+    if (!window.playCountingEnabled) return;
+    /* Fast path: bulk fetch already populated the cache */
+    if (window.playCountsFullyLoaded) {
+      var cached = (window.playCountCache && window.playCountCache[title]) || 0;
+      setBadge(badge, cached, title);
+      return;
+    }
+    
+    badge.textContent = 'loading...';
+    badge.classList.add('loading');
+    db.collection(COLLECTION).doc(toDocId(title)).get()
+      .then(function (snap) {
+        var count = snap.exists ? (snap.data().count || 0) : 0;
+        setBadge(badge, count, title);
+        
+        if (window.sortByPlaysEnabled && !window.playCountsFullyLoaded && window.fgResortGrid) {
+          window.fgResortGrid();
+        }
+      })
+      .catch(function () { setBadge(badge, 0, title); });
+  };
+
+ 
+  window.trackPlay = function (title) {
+    if (!window.playCountingEnabled) return;
+    var ref = db.collection(COLLECTION).doc(toDocId(title));
+    
+    ref.set(
+      { title: title, count: firebase.firestore.FieldValue.increment(1) },
+      { merge: true }
+    )
+    .then(function () { return ref.get(); })
+    .then(function (snap) {
+      var count = snap.exists ? (snap.data().count || 0) : 0;
+      document.querySelectorAll('.card').forEach(function (card) {
+        var lbl = card.querySelector('.item-label');
+        if (lbl && lbl.textContent.trim() === title) {
+          var b = card.querySelector('.play-count-badge');
+          if (b) setBadge(b, count, title);
+        }
+      });
+     
+      if (window.sortByPlaysEnabled && window.fgResortGrid) window.fgResortGrid();
+    })
+    .catch(function (err) { console.warn('trackPlay error:', err); });
+  };
+})();
+</script>
 
 <script>
 (function () {
@@ -1094,8 +1296,6 @@ function fetchItems() {
   };
 
   function loadIntoIframe(url) {
-    /* jsDelivr and Cloudinary both serve .html files as text/plain,
-       so we fetch → inject as a blob to force proper HTML rendering. */
     if (/jsdelivr\.net|cloudinary\.com/i.test(url)) {
       fetch(url)
         .then(function(r) { return r.text(); })
@@ -1118,6 +1318,10 @@ function fetchItems() {
   window.fgOpen = function(itemUrl, title) {
     currentItemUrl = itemUrl;
     currentTitle   = title || 'item';
+
+    /* ── Track the play globally ── */
+    if (window.trackPlay) window.trackPlay(currentTitle);
+
     consoleLine('Loading: ' + currentTitle);
     document.getElementById('fg-title').textContent = currentTitle;
     loadIntoIframe(itemUrl);
@@ -1701,14 +1905,29 @@ function fetchItems() {
     requestAnimationFrame(update);
   }
 
+
+  var playCountCache = {};
+  window.playCountCache = playCountCache;
+  window.setPlayCountCache = function(title, count) {
+    playCountCache[title] = count;
+  };
+
   function sortCards() {
-    var favs = window.fgFavUtils ? window.fgFavUtils.getFavs() : [];
+    var favs    = window.fgFavUtils ? window.fgFavUtils.getFavs() : [];
+    var byPlays = window.sortByPlaysEnabled || false;
     allCards.sort(function(a, b) {
       var aTitle = a.querySelector('.item-label').textContent.trim();
       var bTitle = b.querySelector('.item-label').textContent.trim();
       var aFav = favs.includes(aTitle) ? 0 : 1;
       var bFav = favs.includes(bTitle) ? 0 : 1;
+     
       if (aFav !== bFav) return aFav - bFav;
+      if (byPlays) {
+  
+        var aC = playCountCache[aTitle] || 0;
+        var bC = playCountCache[bTitle] || 0;
+        if (bC !== aC) return bC - aC;
+      }
       return aTitle.localeCompare(bTitle);
     });
     allCards.forEach(function(card) { container.appendChild(card); });
@@ -1716,7 +1935,79 @@ function fetchItems() {
 
   window.fgResortGrid = sortCards;
 
-  /* ── PATCH: BASE_URL now points to jsDelivr CDN ── */
+
+  window.sortByPlaysEnabled = false;
+
+  window.sortPlaysToggle = function() {
+    var SETTINGS_KEY = '4g_settings';
+    window.sortByPlaysEnabled = !window.sortByPlaysEnabled;
+    var toggle = document.getElementById('sort-plays-toggle');
+    var thumb  = document.getElementById('sort-plays-thumb');
+    var label  = document.getElementById('sort-plays-label');
+    var hue    = document.documentElement.style.getPropertyValue('--theme-hue') || '186';
+    var on     = window.sortByPlaysEnabled;
+    toggle.setAttribute('aria-checked', String(on));
+    toggle.style.background  = on ? 'hsl(' + hue + ',65%,32%)' : '';
+    toggle.style.borderColor = on ? 'hsl(' + hue + ',65%,52%)' : '';
+    toggle.style.boxShadow   = on ? '0 0 14px hsl(' + hue + ',80%,45%,0.45)' : '';
+    thumb.style.transform    = on ? 'translateY(-50%) translateX(28px)' : 'translateY(-50%)';
+    thumb.style.background   = on ? '#fff' : '#64748b';
+    thumb.style.boxShadow    = on
+      ? '0 0 8px hsl(' + hue + ',90%,70%,0.7),0 1px 4px rgba(0,0,0,0.3)'
+      : '0 1px 4px rgba(0,0,0,0.5)';
+    label.textContent = on ? 'on' : 'off';
+    label.style.color = on ? 'hsl(' + hue + ',70%,65%)' : '';
+
+    if (on) {
+   
+      if (window.bulkFetchPlayCounts) {
+        window.bulkFetchPlayCounts(sortCards);
+      } else {
+        sortCards();
+      }
+    } else {
+      sortCards();
+    }
+
+    try {
+      var s = JSON.parse(localStorage.getItem(SETTINGS_KEY) || '{}');
+      s.sortByPlays = on;
+      localStorage.setItem(SETTINGS_KEY, JSON.stringify(s));
+    } catch(e) {}
+  };
+
+  /* Restore sort preference on load */
+  (function() {
+    try {
+      var s = JSON.parse(localStorage.getItem('4g_settings') || '{}');
+      if (s.sortByPlays) {
+        window.sortByPlaysEnabled = true;
+        document.addEventListener('DOMContentLoaded', function() {
+          var toggle = document.getElementById('sort-plays-toggle');
+          var thumb  = document.getElementById('sort-plays-thumb');
+          var label  = document.getElementById('sort-plays-label');
+          var hue    = document.documentElement.style.getPropertyValue('--theme-hue') || '186';
+          if (!toggle) return;
+          toggle.setAttribute('aria-checked', 'true');
+          toggle.style.background  = 'hsl(' + hue + ',65%,32%)';
+          toggle.style.borderColor = 'hsl(' + hue + ',65%,52%)';
+          toggle.style.boxShadow   = '0 0 14px hsl(' + hue + ',80%,45%,0.45)';
+          thumb.style.transform    = 'translateY(-50%) translateX(28px)';
+          thumb.style.background   = '#fff';
+          label.textContent        = 'on';
+          label.style.color        = 'hsl(' + hue + ',70%,65%)';
+          /* FIX: bulk-fetch counts immediately on page load so the grid
+             sorts correctly without waiting for the user to hover each card */
+          if (window.bulkFetchPlayCounts) {
+            window.bulkFetchPlayCounts(function() {
+              if (window.fgResortGrid) window.fgResortGrid();
+            });
+          }
+        });
+      }
+    } catch(e) {}
+  })();
+
   var BASE_URL = 'https://cdn.jsdelivr.net/gh/4gamescontacting-alt/4mathtutoring-cards@master';
 
   fetchItems()
@@ -1724,14 +2015,28 @@ function fetchItems() {
       var favs = window.fgFavUtils ? window.fgFavUtils.getFavs() : [];
 
       items.forEach(function(item) {
-        /* If the url in games.json is already absolute, use it as-is.
-           Otherwise prefix with the CDN base so relative paths resolve correctly. */
         var url = /^https?:\/\//i.test(item.url) ? item.url : BASE_URL + '/' + item.url;
         var a = document.createElement('a');
         a.href = url;
         a.className = 'card';
         if (favs.includes(item.title)) a.classList.add('fav-card');
-        a.innerHTML = '<span class="item-label">' + item.title + '</span>';
+
+        /* Label + play count badge */
+        a.innerHTML =
+          '<span class="item-label">' + item.title + '</span>' +
+          '<div class="play-count-badge"></div>';
+
+        /* Lazy-load the count on first hover.
+           FIX: loadPlayCount now serves from cache when bulk fetch is done. */
+        var badge = a.querySelector('.play-count-badge');
+        var countLoaded = false;
+        a.addEventListener('mouseenter', function () {
+          if (!countLoaded) {
+            countLoaded = true;
+            if (window.loadPlayCount) window.loadPlayCount(item.title, badge);
+          }
+        });
+
         container.appendChild(a);
         allCards.push(a);
       });
@@ -1803,6 +2108,92 @@ function fetchItems() {
       if (saved.textLogo) { textLogo = true; applyLogo(true); }
     } catch(e) {}
     setUI(textLogo);
+  });
+})();
+</script>
+
+<script>
+(function () {
+  var SETTINGS_KEY = '4g_settings';
+
+  function getHue() {
+    return document.documentElement.style.getPropertyValue('--theme-hue') || '186';
+  }
+
+  function setPlayCountUI(on) {
+    var toggle = document.getElementById('play-count-toggle');
+    var thumb  = document.getElementById('play-count-thumb');
+    var label  = document.getElementById('play-count-label');
+    if (!toggle) return;
+    var hue = getHue();
+    toggle.setAttribute('aria-checked', String(on));
+    toggle.style.background  = on ? 'hsl(' + hue + ',65%,32%)' : '';
+    toggle.style.borderColor = on ? 'hsl(' + hue + ',65%,52%)' : '';
+    toggle.style.boxShadow   = on ? '0 0 14px hsl(' + hue + ',80%,45%,0.45)' : '';
+    thumb.style.transform    = on ? 'translateY(-50%) translateX(28px)' : 'translateY(-50%)';
+    thumb.style.background   = on ? '#fff' : '#64748b';
+    thumb.style.boxShadow    = on
+      ? '0 0 8px hsl(' + hue + ',90%,70%,0.7),0 1px 4px rgba(0,0,0,0.3)'
+      : '0 1px 4px rgba(0,0,0,0.5)';
+    label.textContent = on ? 'on' : 'off';
+    label.style.color = on ? 'hsl(' + hue + ',70%,65%)' : '';
+  }
+
+  function applyPlayCounting(on) {
+    window.playCountingEnabled = on;
+    document.body.classList.toggle('no-play-counts', !on);
+    /* If turning off, also disable sort-by-plays so the grid doesn't
+       stay sorted by stale counts the user can no longer see */
+    if (!on && window.sortByPlaysEnabled) {
+      window.sortByPlaysEnabled = false;
+      var sToggle = document.getElementById('sort-plays-toggle');
+      var sThumb  = document.getElementById('sort-plays-thumb');
+      var sLabel  = document.getElementById('sort-plays-label');
+      if (sToggle) {
+        sToggle.setAttribute('aria-checked', 'false');
+        sToggle.style.background  = '';
+        sToggle.style.borderColor = '';
+        sToggle.style.boxShadow   = '';
+      }
+      if (sThumb) {
+        sThumb.style.transform  = 'translateY(-50%)';
+        sThumb.style.background = '#64748b';
+        sThumb.style.boxShadow  = '0 1px 4px rgba(0,0,0,0.5)';
+      }
+      if (sLabel) { sLabel.textContent = 'off'; sLabel.style.color = ''; }
+      try {
+        var s = JSON.parse(localStorage.getItem(SETTINGS_KEY) || '{}');
+        s.sortByPlays = false;
+        localStorage.setItem(SETTINGS_KEY, JSON.stringify(s));
+      } catch(e) {}
+      if (window.fgResortGrid) window.fgResortGrid();
+    }
+  }
+
+  window.playCountingToggle = function () {
+    var next = !window.playCountingEnabled;
+    applyPlayCounting(next);
+    setPlayCountUI(next);
+    try {
+      var s = JSON.parse(localStorage.getItem(SETTINGS_KEY) || '{}');
+      s.playCountingDisabled = !next;
+      localStorage.setItem(SETTINGS_KEY, JSON.stringify(s));
+    } catch(e) {}
+  };
+
+  /* Restore on load */
+  document.addEventListener('DOMContentLoaded', function () {
+    try {
+      var saved = JSON.parse(localStorage.getItem(SETTINGS_KEY) || '{}');
+      if (saved.playCountingDisabled) {
+        applyPlayCounting(false);
+        setPlayCountUI(false);
+      } else {
+        setPlayCountUI(true);
+      }
+    } catch(e) {
+      setPlayCountUI(true);
+    }
   });
 })();
 </script>
