@@ -124,7 +124,6 @@
   .card h3 { margin-top: 0; font-weight: 600; }
   .card p { color: var(--text-dim); font-size: 0.9rem; }
 
-  /* ── Play count badge ── */
   .play-count-badge {
     position: absolute;
     bottom: 0;
@@ -842,9 +841,7 @@
 
 <script>
 window.__cachedItems = null;
-/* FIX: flag set to true after a full collection fetch — avoids per-card Firestore reads */
 window.playCountsFullyLoaded = false;
-/* When false, trackPlay and loadPlayCount are both no-ops */
 window.playCountingEnabled = true;
 </script>
 
@@ -934,9 +931,6 @@ function fetchItems() {
       </button>
       <button class="fg-btn" onclick="fgReload()" title="Reload">
         <img src="https://ik.imagekit.io/rckdebdbt/reload.png" alt="Reload" onerror="this.style.display='none';this.parentNode.dataset.fallback='↺';this.parentNode.style.fontSize='20px';this.parentNode.style.color='#94a3b8';">
-      </button>
-      <button class="fg-btn" id="fg-console-btn" onclick="fgToggleConsole()" title="Developer Console" aria-label="Toggle developer console">
-        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23ffffff' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='4 17 10 11 4 5'/%3E%3Cline x1='12' y1='19' x2='20' y2='19'/%3E%3C/svg%3E" alt="Console">
       </button>
       <button class="fg-btn" onclick="fgOpenTab()" title="Open in New Tab">
         <img src="https://ik.imagekit.io/rckdebdbt/newtab.png" alt="New Tab" onerror="this.style.display='none';this.parentNode.dataset.fallback='↗';this.parentNode.style.fontSize='18px';this.parentNode.style.color='#94a3b8';">
@@ -1138,10 +1132,8 @@ function fetchItems() {
     return title.toLowerCase().replace(/[^a-z0-9]/g, '-').replace(/-+/g, '-').slice(0, 100);
   }
 
-  /* Render a count into a badge element */
   function setBadge(badge, count, title) {
     if (!badge) return;
-    /* Update the cache so sort-by-plays stays accurate */
     if (title && window.setPlayCountCache) window.setPlayCountCache(title, count);
     if (count > 0) {
       badge.textContent = count.toLocaleString() + (count === 1 ? ' play' : ' plays');
@@ -1169,7 +1161,6 @@ function fetchItems() {
         if (callback) callback();
       })
       .catch(function () {
-        /* On failure, leave playCountsFullyLoaded false so hover reads still work */
         if (callback) callback();
       });
   };
@@ -1177,9 +1168,7 @@ function fetchItems() {
  
   window.loadPlayCount = function (title, badge) {
     if (!badge) return;
-    /* Counting disabled — leave badge empty, CSS hides it anyway */
     if (!window.playCountingEnabled) return;
-    /* Fast path: bulk fetch already populated the cache */
     if (window.playCountsFullyLoaded) {
       var cached = (window.playCountCache && window.playCountCache[title]) || 0;
       setBadge(badge, cached, title);
@@ -1317,7 +1306,6 @@ function fetchItems() {
     currentItemUrl = itemUrl;
     currentTitle   = title || 'item';
 
-    /* ── Track the play globally ── */
     if (window.trackPlay) window.trackPlay(currentTitle);
 
     consoleLine('Loading: ' + currentTitle);
@@ -1380,11 +1368,7 @@ function fetchItems() {
   };
 
   window.fgDownload = function() {
-    var url = prompt('Enter a URL to load:');
-    if (!url || !url.trim()) return;
-    url = url.trim();
-    if (!/^https?:\/\//i.test(url)) url = 'https://' + url;
-    fgOpen(url, url);
+    confirm("download button will be fixed eventually. probably never bc im lazy");
   };
 
   document.getElementById('fg-iframe').addEventListener('load', function() {
@@ -1974,7 +1958,6 @@ function fetchItems() {
     } catch(e) {}
   };
 
-  /* Restore sort preference on load */
   (function() {
     try {
       var s = JSON.parse(localStorage.getItem('4g_settings') || '{}');
@@ -1994,8 +1977,6 @@ function fetchItems() {
           thumb.style.background   = '#fff';
           label.textContent        = 'on';
           label.style.color        = 'hsl(' + hue + ',70%,65%)';
-          /* FIX: bulk-fetch counts immediately on page load so the grid
-             sorts correctly without waiting for the user to hover each card */
           if (window.bulkFetchPlayCounts) {
             window.bulkFetchPlayCounts(function() {
               if (window.fgResortGrid) window.fgResortGrid();
@@ -2019,13 +2000,10 @@ function fetchItems() {
         a.className = 'card';
         if (favs.includes(item.title)) a.classList.add('fav-card');
 
-        /* Label + play count badge */
         a.innerHTML =
           '<span class="item-label">' + item.title + '</span>' +
           '<div class="play-count-badge"></div>';
 
-        /* Lazy-load the count on first hover.
-           FIX: loadPlayCount now serves from cache when bulk fetch is done. */
         var badge = a.querySelector('.play-count-badge');
         var countLoaded = false;
         a.addEventListener('mouseenter', function () {
@@ -2140,8 +2118,6 @@ function fetchItems() {
   function applyPlayCounting(on) {
     window.playCountingEnabled = on;
     document.body.classList.toggle('no-play-counts', !on);
-    /* If turning off, also disable sort-by-plays so the grid doesn't
-       stay sorted by stale counts the user can no longer see */
     if (!on && window.sortByPlaysEnabled) {
       window.sortByPlaysEnabled = false;
       var sToggle = document.getElementById('sort-plays-toggle');
@@ -2179,7 +2155,6 @@ function fetchItems() {
     } catch(e) {}
   };
 
-  /* Restore on load */
   document.addEventListener('DOMContentLoaded', function () {
     try {
       var saved = JSON.parse(localStorage.getItem(SETTINGS_KEY) || '{}');
